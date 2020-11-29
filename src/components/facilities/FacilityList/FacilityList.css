@@ -1,0 +1,6 @@
+.facilities-wrapper {
+  padding-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
+  gap: 1rem;
+}

@@ -1,0 +1,50 @@
+.facility-item {
+}
+
+.facility-item__image {
+  height: 270px;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.facility-item__image img {
+  width: 100%;
+}
+
+.facility-item__info {
+  background: #edf2f7;
+  padding: 0 1rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.facility-item__info .wrapper {
+  width: 90%;
+  padding: 1rem;
+  margin-top: -4rem;
+  background: #ffffff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.facility-item__info div {
+  padding-bottom: 0.55rem;
+}
+
+.facility-item__info div .category,
+.facility-item__info div .rooms,
+.facility-item__info div .reviews,
+.facility-item__info div sl-badge {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  margin-right: 0.5rem;
+}
+
+.facility-item__info div sl-rating {
+  --symbol-color-active: var(--secondary-color);
+  --symbol-size: 0.75rem;
+  padding-top: 0.5rem;
+  padding-right: 0.5rem;
+}

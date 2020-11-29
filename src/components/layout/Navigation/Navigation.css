@@ -1,0 +1,65 @@
+.navbar {
+  position: sticky;
+  background: #fff;
+  top: 0;
+  left: 0px;
+  z-index: 1000;
+  box-shadow: 0 4px 7px rgba(59, 65, 94, 0.08);
+}
+
+.navbar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* .navbar .logo h1 a {
+  display: inline-block;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  color: white;
+  background: var(--primary-color);
+  padding: 0.25rem 1.5rem;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  letter-spacing: 1.5px;
+  padding: 0.5rem;
+} */
+
+.navbar .logo a svg {
+  width: 180px;
+  height: 40px;
+}
+
+.navbar ul {
+  display: flex;
+  align-items: center;
+}
+
+.navbar ul li {
+  margin-top: 5px;
+}
+
+.navbar ul li a {
+  display: inline-block;
+  margin-left: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  padding: 1.2rem 0;
+  border-bottom: 5px solid transparent;
+}
+
+.navbar ul li a.current {
+  border-bottom: 5px solid var(--secondary-color);
+}
+
+.navbar ul li a.logout {
+  color: rgb(161, 27, 27);
+}
+
+.navbar ul li.username {
+  font-weight: 700;
+  border-bottom: 5px solid transparent;
+}
