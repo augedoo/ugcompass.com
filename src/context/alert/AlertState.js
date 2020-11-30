@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { v4 as uuid } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import AlertContext from './alertContext';
 import alertReducer from './alertReducer';
 import { SET_ALERT, REMOVE_ALERT } from '../types';
@@ -17,7 +17,7 @@ const AlertState = (props) => {
 
   // Set Alert
   const setAlert = (msg, type, icon = '', timeout = 5000) => {
-    const id = uuid();
+    const id = uuidv4();
 
     dispatch({
       type: SET_ALERT,
