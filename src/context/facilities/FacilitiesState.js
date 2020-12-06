@@ -7,6 +7,7 @@ import {
   FACILITIES_ERROR,
   FACILITY_LOADED,
   CLEAR_FACILITY,
+  CLEAR_FACILITIES,
   FACILITY_REVIEWS_LOADED,
   FACILITY_REVIEWS_ERROR,
   TOP_FACILITIES_LOADED,
@@ -28,6 +29,7 @@ const FacilitiesState = (props) => {
   };
 
   const dispatchError = (err, type) => {
+    console.log(err);
     if (err.response.status && err.response.status === 500) {
       dispatch({ type, payload: err.response.statusText });
     } else {
@@ -38,11 +40,17 @@ const FacilitiesState = (props) => {
   const [state, dispatch] = useReducer(facilitiesReducer, initialState);
 
   // Actions
-  const getFacilities = async () => {
+  const getFacilities = async (category) => {
+    let res;
     try {
-      const { data } = await ugCompass.get('/facilities');
-      dispatch({ type: FACILITIES_LOADED, payload: data.data });
+      if (category) {
+        res = await ugCompass.get(`/facilities?category[in]=${category}`);
+      } else {
+        res = await ugCompass.get('/facilities');
+      }
+      dispatch({ type: FACILITIES_LOADED, payload: res.data.data });
     } catch (err) {
+      console.log(err);
       dispatchError(FACILITIES_ERROR);
     }
   };
@@ -99,6 +107,8 @@ const FacilitiesState = (props) => {
 
   const clearFacility = () => dispatch({ type: CLEAR_FACILITY });
 
+  const clearFacilities = () => dispatch({ type: CLEAR_FACILITIES });
+
   return (
     <FacilitiesContext.Provider
       value={{
@@ -111,6 +121,7 @@ const FacilitiesState = (props) => {
         getFacility,
         getFacilityReviews,
         clearFacility,
+        clearFacilities,
         getTopFacilities,
         searchFacility,
       }}

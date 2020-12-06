@@ -4,6 +4,7 @@ import {
   FACILITY_LOADED,
   FACILITY_ERROR,
   CLEAR_FACILITY,
+  CLEAR_FACILITIES,
   SEARCH_SUCCESS,
   SEARCH_FAIL,
   FACILITY_REVIEWS_LOADED,
@@ -39,6 +40,9 @@ const facilityReducer = (state, action) => {
 
     case CLEAR_FACILITY:
       return { ...state, facility: null };
+
+    case CLEAR_FACILITIES:
+      return { ...state, facilities: null };
 
     case FACILITIES_ERROR:
     case FACILITY_ERROR:

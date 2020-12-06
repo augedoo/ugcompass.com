@@ -1,7 +1,13 @@
-import React, { Fragment, useEffect, useState, useContext } from 'react';
+import React, {
+  Fragment,
+  useEffect,
+  useState,
+  useContext,
+  useRef,
+} from 'react';
 import './Navigation.css';
-import { ReactComponent as Logo } from '../../../assets/img/ugcompass_logo.svg';
 import { Link } from 'react-router-dom';
+import Logo from '../Logo/Logo';
 import AuthContext from '../../../context/auth/authContext';
 import FacilitiesContext from '../../../context/facilities/facilitiesContext';
 
@@ -15,6 +21,7 @@ const MainNavigation = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
+  const searchFormRef = useRef();
 
   useEffect(() => {
     let timer;
@@ -46,6 +53,20 @@ const MainNavigation = () => {
     if (searchedFacilities !== null) {
       setSearchResults(searchedFacilities);
     }
+
+    // Close the search result dialog use click outside it
+    const searchFormInactive = (e) => {
+      if (searchFormRef.current.contains(e.target)) {
+        return;
+      }
+      setSearchTerm('');
+    };
+
+    document.addEventListener('click', searchFormInactive);
+
+    return () => {
+      document.removeEventListener('click', searchFormInactive);
+    };
   }, [searchedFacilities]);
 
   const onLogout = () => {
@@ -54,11 +75,32 @@ const MainNavigation = () => {
 
   const authLinks = (
     <Fragment>
-      <li className='username'>Hi {user && user.name.split(' ')[0]}</li>
-      <li>
-        <a className='logout' href='#!' onClick={onLogout}>
-          Logout
-        </a>
+      <li className='username'>
+        Hi {user && user.name}
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          viewBox='0 0 20 20'
+          fill='currentColor'
+        >
+          <path
+            fillRule='evenodd'
+            d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+            clipRule='evenodd'
+          />
+        </svg>
+        <ul>
+          <li>
+            <a href='#/settings'>Settings</a>
+          </li>
+          <li>
+            <a href='#/terms'>Terms and Privacy</a>
+          </li>
+          <li>
+            <a href='#/help'>Help</a>
+          </li>
+
+          <li onClick={onLogout}>Logout</li>
+        </ul>
       </li>
     </Fragment>
   );
@@ -84,13 +126,13 @@ const MainNavigation = () => {
     <div className='navbar'>
       <div className='container'>
         <div className='navbar-wrapper'>
-          <div className='logo'>
-            <a href='/'>
-              <Logo />
-            </a>
-          </div>
+          <Logo />
 
-          <form className='search-form'>
+          <form
+            className='search-form'
+            ref={searchFormRef}
+            style={{ visibility: !isAuthenticated ? 'hidden' : 'visible' }}
+          >
             <input
               type='text'
               placeholder='Search for a place'
@@ -132,7 +174,7 @@ const MainNavigation = () => {
                 ) : (
                   // This spinner will display when searchFacilities is null and loading is true
                   <div className='spinner-container'>
-                    <sl-spinner></sl-spinner> Retriving search results...
+                    <sl-spinner></sl-spinner> Retrieving search results...
                   </div>
                 )}
               </ul>

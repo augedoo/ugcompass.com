@@ -4,6 +4,7 @@ import AccordionSlider from '../../AccordionSlider/AccordionSlider';
 import AuthContext from '../../../context/auth/authContext';
 import FacilitiesContext from '../../../context/facilities/facilitiesContext';
 import Spinner from '../../layout/Spinner/Spinner';
+import CategoriesSection from '../../CategoriesSection/CategoriesSection';
 
 const Home = () => {
   const authContext = useContext(AuthContext);
@@ -33,7 +34,7 @@ const Home = () => {
       </section>
       <section>
         <h1>Categories</h1>
-        <Fragment></Fragment>
+        <CategoriesSection />
       </section>
       <section>
         <h1>Your Favourites</h1>

@@ -50,6 +50,11 @@ function App() {
                     />
                     <PrivateRoute
                       exact
+                      path='/facilities/categories/:category'
+                      component={Facilities}
+                    />
+                    <PrivateRoute
+                      exact
                       path='/facilities/:facilityId'
                       component={Facility}
                     />
