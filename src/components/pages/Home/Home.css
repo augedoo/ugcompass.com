@@ -1,12 +1,18 @@
-/* .homepage {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background: #00376ba1;
-  position: relative;
-  color: white;
+.homepage {
+  padding-top: 2rem;
 }
 
+section {
+  margin-bottom: 3rem;
+}
+
+section h1 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/*
 .homepage::before {
   content: '';
   position: absolute;

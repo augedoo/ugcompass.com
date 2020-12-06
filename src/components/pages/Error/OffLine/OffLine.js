@@ -9,7 +9,7 @@ const OffLine = () => {
         <Logo />
         <h1>Looks like you are not connected to the internet</h1>
         <p>
-          Please establish connection and to continue using your UGC
+          Please establish connection and to continue using UGC
           <span style={{ color: '#D2A969' }}>O</span>MP
           <span style={{ color: '#D2A969' }}>A</span>SS.
         </p>

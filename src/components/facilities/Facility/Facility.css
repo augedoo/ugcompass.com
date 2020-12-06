@@ -1,0 +1,62 @@
+.facility-wrapper {
+  display: grid;
+  grid-template-columns: 1fr minmax(250px, 350px);
+  gap: 3rem;
+  padding-top: 2rem !important ;
+  max-width: 1250px;
+  margin: auto;
+}
+.facility-wrapper .r-content-wrapper {
+  position: sticky;
+  top: 85px;
+}
+.facility-wrapper .r-content {
+  width: 100%;
+}
+
+.facility-wrapper .l-content {
+  min-height: 200vh;
+}
+
+.facility__heading h1 {
+  font-size: 1.7rem;
+  display: flex;
+  align-items: center;
+}
+
+.facility__heading sl-badge {
+  margin-left: 1rem;
+  text-transform: capitalize;
+}
+
+.facility__heading p {
+  padding-top: 0.35rem;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.facility__carousel {
+  width: 100%;
+  height: 450px;
+  margin-top: 1.5rem;
+  background: #ccc;
+}
+
+.facility__rooms {
+  width: 100%;
+  height: 500px;
+  margin-top: 2rem;
+  background: #ccc;
+}
+.facility__rooms h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.facility__reviews {
+  width: 100%;
+  height: 300px;
+  margin-top: 2rem;
+  background: #ccc;
+}

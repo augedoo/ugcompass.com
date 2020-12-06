@@ -1,0 +1,23 @@
+.facility__navigation {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.facility__navigation sl-card {
+  width: 100%;
+}
+
+.facility__navigation li a {
+  display: inline-block;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid #e3e6e8;
+  width: 100%;
+}
+
+.facility__navigation li a:hover {
+  color: var(--secondary-color);
+}
+
+.facility__navigation li:last-child a {
+  border-bottom: none;
+}

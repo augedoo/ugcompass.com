@@ -4,3 +4,9 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
   gap: 1rem;
 }
+
+.empty-facilities-list {
+  color: #0f385e;
+  padding: 8rem;
+  text-align: center;
+}

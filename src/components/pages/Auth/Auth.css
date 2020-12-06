@@ -85,6 +85,10 @@ form .logo svg {
   transition: background-color 5000s ease-in-out 0s;
   background-color: #fff;
 }
+.form-group.forgot-password {
+  display: flex;
+  justify-content: flex-end;
+}
 
 .existing-account {
   text-align: center;

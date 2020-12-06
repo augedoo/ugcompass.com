@@ -14,6 +14,7 @@ const Alerts = () => {
             <sl-icon slot='icon' name={alert.icon}></sl-icon>
           )}
           <strong>{alert.msg}</strong> <br />
+          {alert.subMessage !== '' && alert.subMessage}
         </sl-alert>
       </div>
     ))

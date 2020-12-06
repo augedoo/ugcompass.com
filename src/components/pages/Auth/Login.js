@@ -1,6 +1,7 @@
 import './Auth.css';
 import { ReactComponent as Logo } from '../../../assets/img/ugcompass_logo.svg';
 import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import AuthContext from '../../../context/auth/authContext';
 import AlertContext from '../../../context/alert/alertContext';
@@ -73,6 +74,9 @@ const Login = (props) => {
             required
             minLength='6'
           />
+        </div>
+        <div className='form-group forgot-password'>
+          <Link to='/forgotpassword'>Forgot Password?</Link>
         </div>
         <div className='form-group'>
           <input type='submit' value='Log In' />

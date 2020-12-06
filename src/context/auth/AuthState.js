@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
+import ugCompass from '../apis/ugcompass';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
 import setAuthToken from '../../utils/setAuthToken';
@@ -42,16 +43,16 @@ const AuthState = (props) => {
       const { data } = await axios.get(
         'https://ugcompass.herokuapp.com/api/v1/auth/me'
       );
-
       dispatch({
         type: USER_LOADED,
         payload: data,
       });
     } catch (err) {
-      dispatch({
-        type: AUTH_ERROR,
-        payload: err.response.data.error,
-      });
+      if (err.response.status && err.response.status === 500) {
+        dispatch({ type: AUTH_ERROR, payload: err.response.statusText });
+      } else {
+        dispatch({ type: AUTH_ERROR, payload: err.response.data.error });
+      }
     }
   };
 
@@ -65,11 +66,7 @@ const AuthState = (props) => {
     };
 
     try {
-      const { data } = await axios.post(
-        'https://ugcompass.herokuapp.com/api/v1/auth/register',
-        formData,
-        config
-      );
+      const { data } = await ugCompass.post('/auth/register', formData, config);
       dispatch({
         type: SIGNUP_SUCCESS,
         payload: data,
@@ -77,10 +74,11 @@ const AuthState = (props) => {
 
       loadUser();
     } catch (err) {
-      dispatch({
-        type: SIGNUP_FAIL,
-        payload: err.response.data.error,
-      });
+      if (err.response.status === 500) {
+        dispatch({ type: SIGNUP_FAIL, payload: err.response.statusText });
+      } else {
+        dispatch({ type: SIGNUP_FAIL, payload: err.response.data.error });
+      }
     }
   };
 
@@ -93,11 +91,7 @@ const AuthState = (props) => {
     };
 
     try {
-      const { data } = await axios.post(
-        'https://ugcompass.herokuapp.com/api/v1/auth/login',
-        formData,
-        config
-      );
+      const { data } = await ugCompass.post('/auth/login', formData, config);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: data.token,
@@ -105,10 +99,11 @@ const AuthState = (props) => {
 
       loadUser();
     } catch (err) {
-      dispatch({
-        type: LOGIN_FAIL,
-        payload: err.response.data.error,
-      });
+      if (err.response.status === 500) {
+        dispatch({ type: LOGIN_FAIL, payload: err.response.statusText });
+      } else {
+        dispatch({ type: LOGIN_FAIL, payload: err.response.data.error });
+      }
     }
   };
 

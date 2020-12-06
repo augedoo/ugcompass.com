@@ -16,12 +16,12 @@ const AlertState = (props) => {
   ============*/
 
   // Set Alert
-  const setAlert = (msg, type, icon = '', timeout = 5000) => {
+  const setAlert = (msg, type, icon = '', subMessage = '', timeout = 5000) => {
     const id = uuidv4();
 
     dispatch({
       type: SET_ALERT,
-      payload: { msg, type, icon, id },
+      payload: { msg, subMessage, type, icon, id },
     });
 
     setTimeout(() => {
