@@ -14,22 +14,22 @@
   justify-content: space-between;
 }
 
-.navbar .logo a svg {
-  width: 180px;
-  height: 40px;
-}
+/* *======================
+* List Items
+*======================*/
 
 .navbar ul.auth {
   list-style: none;
 }
 
-.navbar ul.auth li {
+.navbar ul.auth > li {
   display: inline-block;
   position: relative;
   padding: 0.5rem 1.5rem;
   color: var(--primary-color);
   transition: background 0.25s ease-in;
   border-radius: 10px;
+  margin-left: 0.25rem;
 }
 
 .navbar ul.auth .username {
@@ -40,7 +40,7 @@
 
 .navbar ul.auth li:hover {
   cursor: pointer;
-  background: #edf2f7;
+  background: var(--secondary-color);
 }
 
 .navbar ul.auth .username svg {
@@ -55,6 +55,7 @@
 .navbar ul.auth li a {
   text-decoration: none;
   color: inherit;
+  font-weight: 600;
 }
 
 .navbar ul.auth li ul {
@@ -66,7 +67,7 @@
   position: absolute;
   background: #ffffff;
   right: 0;
-  top: 110%;
+  top: 100%;
   width: 200px;
   border-radius: 10px;
   overflow: hidden;
@@ -75,14 +76,18 @@
 
 .navbar ul.auth li:hover ul li {
   display: block;
-  padding: 1rem;
+  padding: 0.75rem;
   border-radius: 0;
   font-weight: 500;
 }
 
 .navbar ul.auth li:hover ul li a {
   color: var(--primary-color);
-  font-weight: inherit;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0 1rem;
+  text-transform: capitalize;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .navbar ul.auth li:hover ul li:hover {
@@ -100,6 +105,29 @@
   background: var(--secondary-color);
 }
 
+.navbar ul.auth li.username {
+  font-weight: 700;
+}
+
+.navbar ul.auth li ul li.logout {
+  padding: 1rem 2rem;
+  border-top: 1px solid #cccccc83;
+}
+.navbar ul.auth li ul li.logout:hover {
+  background: none;
+}
+
+.navbar ul.auth li ul li.logout a {
+  padding: 0.5rem 1.5rem;
+  background: #a11b1b21;
+  color: #a11b1b;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+/* *======================
+* Search Form  
+*======================*/
 .navbar .search-form {
   flex: 1;
   margin: 0 4rem;
@@ -169,18 +197,4 @@
 }
 .navbar .search-result li a:hover {
   background: #e2e5e9;
-}
-
-.navbar ul li a.logout {
-  color: rgb(161, 27, 27);
-}
-
-.navbar ul li.username {
-  font-weight: 700;
-  border-bottom: 5px solid transparent;
-}
-
-.navbar sl-button {
-  outline: none;
-  border: none;
 }

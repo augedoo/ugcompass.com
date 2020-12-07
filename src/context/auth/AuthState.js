@@ -12,6 +12,11 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   CLEAR_ERRORS,
+  CLEAR_MESSAGES,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAIL,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAIL,
   LOGOUT,
 } from '../types';
 
@@ -23,6 +28,7 @@ const AuthState = (props) => {
     loading: true,
     user: null,
     error: null,
+    message: null,
   };
 
   // Init Reducer
@@ -107,11 +113,61 @@ const AuthState = (props) => {
     }
   };
 
+  // Forgot Password
+  const forgotPassword = async (email) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      const { data } = await ugCompass.post(
+        '/auth/forgotpassword',
+        email,
+        config
+      );
+      dispatch({ type: FORGOT_PASSWORD_SUCCESS, payload: data });
+    } catch (err) {
+      dispatch({
+        type: FORGOT_PASSWORD_FAIL,
+        payload: err.response.data.error,
+      });
+    }
+  };
+
+  // Reset Password
+  const resetPassword = async (password, resetToken) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const formData = {
+      password,
+    };
+    try {
+      const { data } = await ugCompass.put(
+        `/auth/resetpassword/${resetToken}`,
+        formData,
+        config
+      );
+      dispatch({ type: RESET_PASSWORD_SUCCESS, payload: data.token });
+    } catch (err) {
+      dispatch({
+        type: RESET_PASSWORD_FAIL,
+        payload: err.response.data.error,
+      });
+    }
+  };
+
   // Logout
   const logout = () => dispatch({ type: LOGOUT });
 
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
+
+  // Clear Messages
+  const clearMessages = () => dispatch({ type: CLEAR_MESSAGES });
 
   return (
     <AuthContext.Provider
@@ -120,12 +176,16 @@ const AuthState = (props) => {
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,
         user: state.user,
+        message: state.message,
         error: state.error,
         signup,
         loadUser,
         login,
         logout,
+        forgotPassword,
+        resetPassword,
         clearErrors,
+        clearMessages,
       }}
     >
       {props.children}

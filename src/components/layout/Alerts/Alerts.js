@@ -1,5 +1,6 @@
 import './Alerts.css';
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
+import { v4 as uuid } from 'uuid';
 import AlertContext from '../../../context/alert/alertContext';
 
 const Alerts = () => {
@@ -9,7 +10,7 @@ const Alerts = () => {
     alertContext.alerts.length > 0 &&
     alertContext.alerts.map((alert) => (
       <div className='alert-container'>
-        <sl-alert key={alert.id} type={alert.type} open>
+        <sl-alert key={uuid()} type={alert.type} open>
           {alert.icon !== '' && (
             <sl-icon slot='icon' name={alert.icon}></sl-icon>
           )}

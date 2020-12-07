@@ -68,7 +68,7 @@ function App() {
                     />
                     <Route
                       exact
-                      path='/changepassword'
+                      path='/changepassword/:resetToken'
                       component={ChangePassword}
                     />
                     <Route component={NotFound} />

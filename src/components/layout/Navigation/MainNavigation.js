@@ -8,6 +8,7 @@ import React, {
 import './Navigation.css';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
+import CategoriesMenu from '../../CategoriesMenu/CategoriesMenu';
 import AuthContext from '../../../context/auth/authContext';
 import FacilitiesContext from '../../../context/facilities/facilitiesContext';
 
@@ -93,13 +94,14 @@ const MainNavigation = () => {
             <a href='#/settings'>Settings</a>
           </li>
           <li>
-            <a href='#/terms'>Terms and Privacy</a>
-          </li>
-          <li>
             <a href='#/help'>Help</a>
           </li>
-
-          <li onClick={onLogout}>Logout</li>
+          <li>
+            <a href='#/terms'>Terms and Privacy</a>
+          </li>
+          <li className='logout' onClick={onLogout}>
+            <a href='#'>Logout</a>
+          </li>
         </ul>
       </li>
     </Fragment>
@@ -127,6 +129,8 @@ const MainNavigation = () => {
       <div className='container'>
         <div className='navbar-wrapper'>
           <Logo />
+
+          <CategoriesMenu />
 
           <form
             className='search-form'

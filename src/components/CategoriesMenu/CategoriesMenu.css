@@ -1,0 +1,73 @@
+/* *======================
+* List Items
+*======================*/
+.categories-menu {
+  list-style: none;
+}
+
+.categories-menu .main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+.categories-menu .icon {
+  display: inline-block;
+  padding: 0.35rem;
+  border-radius: 50%;
+  height: 38px;
+  width: 38px;
+  margin-right: 0.35rem;
+  margin-left: 2rem;
+  transition: background 0.25s ease-in;
+}
+
+.categories-menu li {
+  position: relative;
+  color: var(--primary-color);
+}
+
+.categories-menu li:hover {
+  cursor: pointer;
+}
+.categories-menu li:hover .icon {
+  background: var(--secondary-color);
+}
+
+.categories-menu li ul {
+  display: none;
+}
+
+.categories-menu li:hover ul {
+  display: block;
+  position: absolute;
+  background: #ffffff;
+  left: 0;
+  top: 100%;
+  width: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 7px rgba(59, 65, 94, 0.08);
+}
+
+.categories-menu li:hover ul li {
+  display: block;
+  padding: 0.75rem;
+  border-radius: 0;
+  font-weight: 500;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.categories-menu li:hover ul li a {
+  color: var(--primary-color);
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0 1rem;
+  text-transform: capitalize;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.categories-menu li:hover ul li:hover {
+  background: #edf2f7;
+  color: inherit;
+}

@@ -36,10 +36,10 @@ const Home = () => {
         <h1>Categories</h1>
         <CategoriesSection />
       </section>
-      <section>
+      {/* <section>
         <h1>Your Favourites</h1>
         <Fragment></Fragment>
-      </section>
+      </section> */}
       <section>
         <h1>Your Reviews</h1>
         <Fragment></Fragment>

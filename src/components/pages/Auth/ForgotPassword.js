@@ -1,14 +1,63 @@
 import './Auth.css';
 import { ReactComponent as Logo } from '../../../assets/img/ugcompass_logo.svg';
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+
+import AuthContext from '../../../context/auth/authContext';
+import AlertContext from '../../../context/alert/alertContext';
 
 const ForgotPassword = () => {
+  const authContext = useContext(AuthContext);
+  const alertContext = useContext(AlertContext);
+  const {
+    forgotPassword,
+    message,
+    error,
+    clearErrors,
+    clearMessages,
+  } = authContext;
+  const { setAlert } = alertContext;
+
   const [email, setEmail] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(email);
+    forgotPassword({ email });
   };
+
+  useEffect(() => {
+    if (message === 'Email Sent') {
+      setAlert(
+        message + ' Successfully',
+        'success',
+        'check2-circle',
+        'Please check you inbox for a link to reset your password',
+        20000
+      );
+    }
+    if (error === 'Email could not be sent') {
+      setAlert(
+        error,
+        'danger',
+        'exclamation-octagon',
+        'Please check you email and try again',
+        10000
+      );
+    }
+    if (error === 'No user with that email') {
+      setAlert(
+        error,
+        'danger',
+        'exclamation-octagon',
+        'Please check you email and try again',
+        10000
+      );
+    }
+
+    return () => {
+      clearErrors();
+      clearMessages();
+    };
+  }, [message, error]);
 
   return (
     <form onSubmit={onSubmit}>
@@ -29,7 +78,7 @@ const ForgotPassword = () => {
           />
         </div>
         <div className='form-group'>
-          <input type='submit' value='Reset Password' />
+          <button type='submit'>Reset Password</button>
         </div>
         <div className='existing-account'>
           Don't have an account? <a href='/signup'>Sign Up</a>

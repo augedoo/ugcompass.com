@@ -7,9 +7,14 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
+  CLEAR_MESSAGES,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAIL,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAIL,
 } from '../types';
 
-export default (state, action) => {
+const AuthReducer = (state, action) => {
   switch (action.type) {
     case USER_LOADED:
       return {
@@ -30,28 +35,49 @@ export default (state, action) => {
         loading: false,
       };
 
+    case RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        token: action.payload,
+        message: 'Password Reset Successful',
+        loading: false,
+      };
+
+    case FORGOT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        message: action.payload.data,
+        loading: false,
+      };
+
     case SIGNUP_FAIL:
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:
+    case FORGOT_PASSWORD_FAIL:
+    case RESET_PASSWORD_FAIL:
       localStorage.removeItem('ugcompass_token');
-
       return {
         ...state,
         token: null,
         isAuthenticated: false,
         loading: false,
         user: null,
+        message: null,
         error: action.payload,
       };
 
     case CLEAR_ERRORS:
+    case CLEAR_MESSAGES:
       return {
         ...state,
         error: null,
+        message: null,
       };
 
     default:
       return state;
   }
 };
+
+export default AuthReducer;

@@ -110,7 +110,7 @@ const Signup = (props) => {
           />
         </div>
         <div className='form-group'>
-          <input type='submit' value='Sign Up' />
+          <button type='submit'>Sign Up</button>
         </div>
         <div className='existing-account'>
           Already have an account? <a href='/login'>Log In</a>

@@ -18,8 +18,6 @@ const Login = (props) => {
     password: '',
   });
 
-  const { email, password } = formData;
-
   useEffect(() => {
     // Redirect when authenticated
     if (isAuthenticated) {
@@ -79,7 +77,7 @@ const Login = (props) => {
           <Link to='/forgotpassword'>Forgot Password?</Link>
         </div>
         <div className='form-group'>
-          <input type='submit' value='Log In' />
+          <button type='submit'>Log In</button>
         </div>
         <div className='existing-account'>
           Don't have an account? <a href='/signup'>Sign Up</a>
