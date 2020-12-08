@@ -1,10 +1,10 @@
 import './Home.css';
 import React, { useEffect, useContext, Fragment } from 'react';
-import AccordionSlider from '../../AccordionSlider/AccordionSlider';
+import AccordionSlider from '../../layout/AccordionSlider/AccordionSlider';
 import AuthContext from '../../../context/auth/authContext';
 import FacilitiesContext from '../../../context/facilities/facilitiesContext';
 import Spinner from '../../layout/Spinner/Spinner';
-import CategoriesSection from '../../CategoriesSection/CategoriesSection';
+import CategoriesSection from '../../layout/CategoriesSection/CategoriesSection';
 
 const Home = () => {
   const authContext = useContext(AuthContext);

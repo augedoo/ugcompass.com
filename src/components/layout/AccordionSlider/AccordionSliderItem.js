@@ -9,7 +9,9 @@ const AccordionSliderItem = (props) => {
       className={`accordion-gallery__item ${active}`}
       onClick={() => toggleItem(index)}
     >
-      <a className='goto' href={`/facilities/${item.id}`}></a>
+      <a className='goto' href={`/facilities/${item.id}`}>
+        Goto
+      </a>
       <div className='accordion-gallery__item__img'>
         <img src={imageUrl} alt='Accordion Item' />
       </div>

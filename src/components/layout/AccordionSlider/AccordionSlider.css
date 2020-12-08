@@ -42,6 +42,7 @@
 }
 .accordion-gallery__item--active a.goto {
   display: inline-block;
+  opacity: 0;
 }
 
 .accordion-gallery__item--active .accordion-gallery__item__info {

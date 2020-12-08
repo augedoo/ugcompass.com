@@ -130,7 +130,7 @@
 *======================*/
 .navbar .search-form {
   flex: 1;
-  margin: 0 4rem;
+  margin: 0 2rem;
   display: flex;
   position: relative;
 }

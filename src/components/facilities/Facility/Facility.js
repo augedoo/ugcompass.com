@@ -5,7 +5,7 @@ import Navigation from './ContentNavigation/ContentNavigation';
 import FacilityDetails from './Details/Details';
 import Map from './Map/Map';
 import Reviews from './Reviews/Reviews';
-import Carousel from '../../Carousel/Carousel';
+import Carousel from '../../layout/Carousel/Carousel';
 
 import FacilityContext from '../../../context/facilities/facilitiesContext';
 import AuthContext from '../../../context/auth/authContext';

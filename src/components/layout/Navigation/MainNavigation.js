@@ -57,18 +57,18 @@ const MainNavigation = () => {
 
     // Close the search result dialog use click outside it
     const searchFormInactive = (e) => {
-      if (searchFormRef.current.contains(e.target)) {
-        return;
+      if (searchFormRef.current) {
+        if (searchFormRef.current.contains(e.target)) {
+          return;
+        }
       }
       setSearchTerm('');
     };
 
     document.addEventListener('click', searchFormInactive);
 
-    return () => {
-      document.removeEventListener('click', searchFormInactive);
-    };
-  }, [searchedFacilities]);
+    return () => document.removeEventListener('click', searchFormInactive);
+  }, [searchedFacilities, searchFormRef.current]);
 
   const onLogout = () => {
     logout();
@@ -97,13 +97,16 @@ const MainNavigation = () => {
             <Fragment>
               {user.role === 'admin' && (
                 <li>
-                  <a href='#/admin-dashboard'>Admin Dashboard</a>
+                  <a href='/admin'>Admin</a>
                 </li>
               )}
             </Fragment>
           )}
           <li>
             <a href='#/help'>Help</a>
+          </li>
+          <li>
+            <a href='/about'>About</a>
           </li>
           <li>
             <a href='#/terms'>Terms and Privacy</a>
@@ -141,58 +144,56 @@ const MainNavigation = () => {
 
           <CategoriesMenu />
 
-          <form
-            className='search-form'
-            ref={searchFormRef}
-            style={{ visibility: !isAuthenticated ? 'hidden' : 'visible' }}
-          >
-            <input
-              type='text'
-              placeholder='Search for a place'
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+          {isAuthenticated && (
+            <form className='search-form' ref={searchFormRef}>
+              <input
+                type='text'
+                placeholder='Search for a place'
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
 
-            {/* Display search results */}
-            {searchTerm !== '' && (
-              <ul className='search-result'>
-                {searchedFacilities !== null && !loading ? (
-                  <Fragment>
-                    {/* this will render when the is some results for the search */}
-                    {searchResults &&
-                      searchResults.length !== 0 &&
-                      searchResults.map((result) => (
-                        <li key={result.id}>
-                          <Link
-                            to={`/facilities/${result.id}`}
-                            onClick={onResultClick}
-                          >
-                            {result.name}
-                          </Link>
-                        </li>
-                      ))}
+              {/* Display search results */}
+              {searchTerm !== '' && (
+                <ul className='search-result'>
+                  {searchedFacilities !== null && !loading ? (
+                    <Fragment>
+                      {/* this will render when the is some results for the search */}
+                      {searchResults &&
+                        searchResults.length !== 0 &&
+                        searchResults.map((result) => (
+                          <li key={result.id}>
+                            <Link
+                              to={`/facilities/${result.id}`}
+                              onClick={onResultClick}
+                            >
+                              {result.name}
+                            </Link>
+                          </li>
+                        ))}
 
-                    {/* This is to clear the previous search result  */}
-                    {searchResults === null && (
-                      <div className='spinner-container'>
-                        <sl-spinner></sl-spinner> Retriving search results...
-                      </div>
-                    )}
+                      {/* This is to clear the previous search result  */}
+                      {searchResults === null && (
+                        <div className='spinner-container'>
+                          <sl-spinner></sl-spinner> Retriving search results...
+                        </div>
+                      )}
 
-                    {/* This will display when we found nothing for the search */}
-                    {searchResults && searchResults.length === 0 && (
-                      <div className='no-result'>Nothing Found</div>
-                    )}
-                  </Fragment>
-                ) : (
-                  // This spinner will display when searchFacilities is null and loading is true
-                  <div className='spinner-container'>
-                    <sl-spinner></sl-spinner> Retrieving search results...
-                  </div>
-                )}
-              </ul>
-            )}
-          </form>
+                      {/* This will display when we found nothing for the search */}
+                      {searchResults && searchResults.length === 0 && (
+                        <div className='no-result'>Nothing Found</div>
+                      )}
+                    </Fragment>
+                  ) : (
+                    // This spinner will display when searchFacilities is null and loading is true
+                    <div className='spinner-container'>
+                      <sl-spinner></sl-spinner> Retrieving search results...
+                    </div>
+                  )}
+                </ul>
+              )}
+            </form>
+          )}
 
           <ul className='auth'>{isAuthenticated ? authLinks : guestLinks}</ul>
         </div>
