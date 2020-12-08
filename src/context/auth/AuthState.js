@@ -54,11 +54,12 @@ const AuthState = (props) => {
         payload: data,
       });
     } catch (err) {
-      if (err.response.status && err.response.status === 500) {
-        dispatch({ type: AUTH_ERROR, payload: err.response.statusText });
-      } else {
-        dispatch({ type: AUTH_ERROR, payload: err.response.data.error });
-      }
+      console.log(err);
+      // if (err.response.status && err.response.status === 500) {
+      //   dispatch({ type: AUTH_ERROR, payload: err.response.statusText });
+      // } else {
+      //   dispatch({ type: AUTH_ERROR, payload: err.response.data.error });
+      // }
     }
   };
 

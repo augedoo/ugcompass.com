@@ -45,8 +45,5 @@
 }
 
 .categories .item:hover .arrow-icon {
-  background: var(--primary-color);
-}
-.categories .item:hover svg {
-  fill: white;
+  background: var(--secondary-color);
 }

@@ -61,7 +61,11 @@ function App() {
                       path='/facilities/:facilityId'
                       component={Facility}
                     />
-                    <PrivateRoute exact path='/admin' component={Dashboard} />
+                    <PrivateRoute
+                      exact
+                      path='/admin-dashboard'
+                      component={Dashboard}
+                    />
                     <PrivateRoute exact path='/about' component={About} />
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/signup' component={Signup} />

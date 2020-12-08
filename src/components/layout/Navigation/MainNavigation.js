@@ -97,20 +97,17 @@ const MainNavigation = () => {
             <Fragment>
               {user.role === 'admin' && (
                 <li>
-                  <a href='/admin'>Admin</a>
+                  <a href='/admin-dashboard'>Admin</a>
                 </li>
               )}
             </Fragment>
           )}
           <li>
-            <a href='#/help'>Help</a>
-          </li>
-          <li>
             <a href='/about'>About</a>
           </li>
-          <li>
+          {/* <li>
             <a href='#/terms'>Terms and Privacy</a>
-          </li>
+          </li> */}
           <li className='logout' onClick={onLogout}>
             <a href='#'>Logout</a>
           </li>
