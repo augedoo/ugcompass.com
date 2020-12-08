@@ -12,6 +12,10 @@ import {
   FORGOT_PASSWORD_FAIL,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAIL,
+  UPDATE_PASSWORD_SUCCESS,
+  UPDATE_PASSWORD_FAIL,
+  UPDATE_DETAIL_SUCCESS,
+  UPDATE_DETAIL_FAIL,
 } from '../types';
 
 const AuthReducer = (state, action) => {
@@ -47,6 +51,29 @@ const AuthReducer = (state, action) => {
       return {
         ...state,
         message: action.payload.data,
+        loading: false,
+      };
+
+    case UPDATE_DETAIL_SUCCESS:
+      return {
+        ...state,
+        user: action.payload.data,
+        message: 'Detail updated successfully',
+        loading: false,
+      };
+    case UPDATE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        user: action.payload.data,
+        message: 'Password updated successfully',
+        loading: false,
+      };
+
+    case UPDATE_PASSWORD_FAIL:
+    case UPDATE_DETAIL_FAIL:
+      return {
+        ...state,
+        error: action.payload,
         loading: false,
       };
 

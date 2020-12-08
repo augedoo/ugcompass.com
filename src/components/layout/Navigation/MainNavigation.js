@@ -91,7 +91,7 @@ const MainNavigation = () => {
         </svg>
         <ul>
           <li>
-            <a href='#/settings'>Settings</a>
+            <a href='/user-settings'>Settings</a>
           </li>
           {user && (
             <Fragment>

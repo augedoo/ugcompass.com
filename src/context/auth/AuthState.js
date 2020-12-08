@@ -17,6 +17,10 @@ import {
   FORGOT_PASSWORD_FAIL,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAIL,
+  UPDATE_PASSWORD_SUCCESS,
+  UPDATE_PASSWORD_FAIL,
+  UPDATE_DETAIL_SUCCESS,
+  UPDATE_DETAIL_FAIL,
   LOGOUT,
 } from '../types';
 
@@ -161,6 +165,60 @@ const AuthState = (props) => {
     }
   };
 
+  // Update user detail
+  const updateUserDetail = async (name, email) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('ugcompass_token'),
+      },
+    };
+    const formData = {
+      name,
+      email,
+    };
+    try {
+      const { data } = await ugCompass.put(
+        `/auth/updatedetails`,
+        formData,
+        config
+      );
+      dispatch({ type: UPDATE_DETAIL_SUCCESS, payload: data });
+    } catch (err) {
+      dispatch({
+        type: UPDATE_DETAIL_FAIL,
+        payload: err.response.data.error,
+      });
+    }
+  };
+
+  // Update user password
+  const updateUserPassword = async (currentPassword, newPassword) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('ugcompass_token'),
+      },
+    };
+    const formData = {
+      currentPassword,
+      newPassword,
+    };
+    try {
+      const { data } = await ugCompass.put(
+        `/auth/updatepassword`,
+        formData,
+        config
+      );
+      dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data.token });
+    } catch (err) {
+      dispatch({
+        type: UPDATE_PASSWORD_FAIL,
+        payload: err.response.data.error,
+      });
+    }
+  };
+
   // Logout
   const logout = () => dispatch({ type: LOGOUT });
 
@@ -187,6 +245,8 @@ const AuthState = (props) => {
         resetPassword,
         clearErrors,
         clearMessages,
+        updateUserPassword,
+        updateUserDetail,
       }}
     >
       {props.children}

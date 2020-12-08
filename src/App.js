@@ -11,6 +11,7 @@ import NotFound from './components/pages/Error/NotFound';
 import ForgotPassword from './components/pages/Auth/ForgotPassword';
 import ChangePassword from './components/pages/Auth/ChangePassword';
 import Dashboard from './components/pages/Admin/Dashboard';
+import UserSettings from './components/pages/UserSettings/UserSettings';
 
 import OffLineContent from './components/pages/Error/OffLine/OffLine';
 import MainNavigation from './components/layout/Navigation/MainNavigation.js';
@@ -65,6 +66,11 @@ function App() {
                       exact
                       path='/admin-dashboard'
                       component={Dashboard}
+                    />
+                    <PrivateRoute
+                      exact
+                      path='/user-settings'
+                      component={UserSettings}
                     />
                     <PrivateRoute exact path='/about' component={About} />
                     <Route exact path='/login' component={Login} />
