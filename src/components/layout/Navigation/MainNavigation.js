@@ -93,6 +93,15 @@ const MainNavigation = () => {
           <li>
             <a href='#/settings'>Settings</a>
           </li>
+          {user && (
+            <Fragment>
+              {user.role === 'admin' && (
+                <li>
+                  <a href='#/admin-dashboard'>Admin Dashboard</a>
+                </li>
+              )}
+            </Fragment>
+          )}
           <li>
             <a href='#/help'>Help</a>
           </li>
