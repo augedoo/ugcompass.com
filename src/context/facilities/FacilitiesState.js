@@ -28,15 +28,6 @@ const FacilitiesState = (props) => {
     error: null,
   };
 
-  const dispatchError = (err, type) => {
-    console.log(err);
-    if (err.response.status && err.response.status === 500) {
-      dispatch({ type, payload: err.response.statusText });
-    } else {
-      dispatch({ type, payload: err.response.data.error });
-    }
-  };
-
   const [state, dispatch] = useReducer(facilitiesReducer, initialState);
 
   // Actions
@@ -50,8 +41,17 @@ const FacilitiesState = (props) => {
       }
       dispatch({ type: FACILITIES_LOADED, payload: res.data.data });
     } catch (err) {
-      console.log(err);
-      dispatchError(FACILITIES_ERROR);
+      dispatch({ type: FACILITIES_ERROR, payload: err.response.data.error });
+    }
+  };
+
+  const getFacility = async (facilityId) => {
+    try {
+      const { data } = await ugCompass.get(`/facilities/${facilityId}`);
+      dispatch({ type: FACILITY_LOADED, payload: data.data });
+    } catch (err) {
+      console.log(err.response);
+      dispatch({ type: FACILITY_ERROR, payload: err.response.data.error });
     }
   };
 
@@ -63,19 +63,9 @@ const FacilitiesState = (props) => {
           per_page: 5,
         },
       });
-      console.log(data);
       dispatch({ type: SEARCH_SUCCESS, payload: data });
     } catch (err) {
-      dispatchError(SEARCH_FAIL);
-    }
-  };
-
-  const getFacility = async (facilityId) => {
-    try {
-      const { data } = await ugCompass.get(`/facilities/${facilityId}`, {});
-      dispatch({ type: FACILITY_LOADED, payload: data.data });
-    } catch (err) {
-      dispatchError(err, FACILITY_ERROR);
+      dispatch({ type: SEARCH_FAIL, payload: err.response.data.error });
     }
   };
 
@@ -85,7 +75,10 @@ const FacilitiesState = (props) => {
 
       dispatch({ type: FACILITY_REVIEWS_LOADED, payload: data.data });
     } catch (err) {
-      dispatchError(err, FACILITY_REVIEWS_ERROR);
+      dispatch({
+        type: FACILITY_REVIEWS_ERROR,
+        payload: err.response.data.error,
+      });
     }
   };
 
@@ -101,7 +94,10 @@ const FacilitiesState = (props) => {
       console.log(data);
       dispatch({ type: TOP_FACILITIES_LOADED, payload: data });
     } catch (err) {
-      dispatchError(err, TOP_FACILITIES_ERROR);
+      dispatch({
+        type: TOP_FACILITIES_ERROR,
+        payload: err.response.data.error,
+      });
     }
   };
 

@@ -1,10 +1,11 @@
 import './Facility.css';
-import React, { Fragment, useEffect, useContext, useCallback } from 'react';
+import React, { Fragment, useEffect, useContext } from 'react';
 import Spinner from '../../layout/Spinner/Spinner';
 import Navigation from './ContentNavigation/ContentNavigation';
 import FacilityDetails from './Details/Details';
 import Map from './Map/Map';
 import Reviews from './Reviews/Reviews';
+import RoomsList from './RoomsList/RoomsList';
 import Carousel from '../../layout/Carousel/Carousel';
 
 import FacilityContext from '../../../context/facilities/facilitiesContext';
@@ -20,29 +21,19 @@ const Facility = (props) => {
     loading,
     clearFacility,
   } = faciltyContext;
-
-  const carouselContainerRef = useCallback((node) => {
-    if (node !== null) {
-      let containerWidth;
-      window.addEventListener('load', () => {
-        containerWidth = node.clientWidth;
-      });
-      window.addEventListener('resize', () => {
-        containerWidth = node.clientWidth;
-      });
-    }
-  }, []);
+  const { user, loadUser } = authContext;
 
   useEffect(() => {
+    loadUser();
+
     const facilityId = props.match.params.facilityId;
-    authContext.loadUser();
-    getFacility(facilityId);
+    if (facilityId) getFacility(facilityId);
 
     return () => {
       clearFacility();
     };
     // eslint-disable-next-line
-  }, [props.match.params.facilityId, error]);
+  }, [error]);
 
   return (
     <Fragment>
@@ -50,27 +41,33 @@ const Facility = (props) => {
         <main className='facility-wrapper'>
           <div className='l-content'>
             <div className='facility'>
-              <section id='photos' className='facility__heading'>
+              <section className='facility__heading'>
                 <h1>
                   {facility.name}
                   <sl-badge type='info'>{`${facility.campus} campus`}</sl-badge>
                 </h1>
                 <p>{`${facility.category} facility`}</p>
               </section>
-              <section
-                className='facility__carousel'
-                ref={carouselContainerRef}
-              >
-                {/* <Carousel /> */}
-              </section>
+
               <section id='details' className='facility__details'>
                 <h3>Description</h3>
                 <FacilityDetails facility={facility} />
               </section>
-              <section id='rooms' className='facility__rooms'>
-                <h3>Rooms in {facility.name}</h3>
+
+              <section id='photos' className='facility__carousel'>
+                {/* <Carousel /> */}
               </section>
+
+              {facility.rooms.length > 0 && (
+                <section id='rooms' className='facility__rooms'>
+                  <h3>Rooms</h3>
+                  <RoomsList rooms={facility.rooms} />
+                </section>
+              )}
+
               <section id='reviews' className='facility__reviews'>
+                <h3>Reviews</h3>
+                {/* <form onSubmit={onReviewSubmit}></form> */}
                 <Reviews />
               </section>
             </div>

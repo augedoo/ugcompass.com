@@ -8,10 +8,10 @@ const ContentNavigation = () => {
       <sl-card class='card-basic'>
         <ul>
           <li>
-            <a href='#photos'>Photos</a>
+            <a href='#details'>Description</a>
           </li>
           <li>
-            <a href='#details'>Description</a>
+            <a href='#photos'>Photos</a>
           </li>
           <li>
             <a href='#rooms'>Rooms</a>

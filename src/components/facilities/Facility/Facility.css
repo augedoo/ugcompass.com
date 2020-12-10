@@ -45,9 +45,7 @@
 
 .facility__rooms {
   width: 100%;
-  height: 500px;
   margin-top: 2rem;
-  background: #ccc;
 }
 .facility__rooms h3 {
   font-size: 1.1rem;

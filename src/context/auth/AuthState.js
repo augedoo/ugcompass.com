@@ -53,7 +53,6 @@ const AuthState = (props) => {
       const { data } = await axios.get(
         'https://ugcompass.herokuapp.com/api/v1/auth/me'
       );
-      console.log(data);
       dispatch({
         type: USER_LOADED,
         payload: data,
