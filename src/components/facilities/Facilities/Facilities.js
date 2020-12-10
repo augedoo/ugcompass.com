@@ -24,6 +24,8 @@ const FacilityList = (props) => {
   // Get facility when component load
   useEffect(() => {
     authContext.loadUser();
+
+    // Get facility category from url
     if (props.match.params.category) {
       getFacilities(props.match.params.category);
     } else {

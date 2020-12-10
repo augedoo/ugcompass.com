@@ -53,17 +53,14 @@ const AuthState = (props) => {
       const { data } = await axios.get(
         'https://ugcompass.herokuapp.com/api/v1/auth/me'
       );
+      console.log(data);
       dispatch({
         type: USER_LOADED,
         payload: data,
       });
     } catch (err) {
       console.log(err);
-      // if (err.response.status && err.response.status === 500) {
-      //   dispatch({ type: AUTH_ERROR, payload: err.response.statusText });
-      // } else {
-      //   dispatch({ type: AUTH_ERROR, payload: err.response.data.error });
-      // }
+      dispatch({ type: AUTH_ERROR, payload: err.response.data.error });
     }
   };
 
@@ -85,11 +82,7 @@ const AuthState = (props) => {
 
       loadUser();
     } catch (err) {
-      if (err.response.status === 500) {
-        dispatch({ type: SIGNUP_FAIL, payload: err.response.statusText });
-      } else {
-        dispatch({ type: SIGNUP_FAIL, payload: err.response.data.error });
-      }
+      dispatch({ type: SIGNUP_FAIL, payload: err.response.data.error });
     }
   };
 
@@ -110,11 +103,7 @@ const AuthState = (props) => {
 
       loadUser();
     } catch (err) {
-      if (err.response.status === 500) {
-        dispatch({ type: LOGIN_FAIL, payload: err.response.statusText });
-      } else {
-        dispatch({ type: LOGIN_FAIL, payload: err.response.data.error });
-      }
+      dispatch({ type: LOGIN_FAIL, payload: err.response.data.error });
     }
   };
 

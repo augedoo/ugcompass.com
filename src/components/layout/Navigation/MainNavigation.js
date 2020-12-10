@@ -8,7 +8,7 @@ import React, {
 import './Navigation.css';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
-import CategoriesMenu from '../../CategoriesMenu/CategoriesMenu';
+import CategoriesMenu from '../CategoriesMenu/CategoriesMenu';
 import AuthContext from '../../../context/auth/authContext';
 import FacilitiesContext from '../../../context/facilities/facilitiesContext';
 

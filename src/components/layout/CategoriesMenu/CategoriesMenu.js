@@ -1,6 +1,6 @@
 import './CategoriesMenu.css';
 import React, { Fragment, useContext } from 'react';
-import AuthContext from '../../context/auth/authContext';
+import AuthContext from '../../../context/auth/authContext';
 
 const CategoriesMenu = () => {
   const authContext = useContext(AuthContext);
