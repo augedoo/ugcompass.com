@@ -1,15 +1,17 @@
 import './ServerError.css';
-import React, { Fragment } from 'react';
+import { ReactComponent as Logo } from '../../../../assets/img/ugcompass_logo.svg';
+import React from 'react';
 
-function ServerError() {
+const ServerError = () => {
   return (
-    <div className='sever-error'>
-      <h1>Internal Server Error</h1>
-      <p className='lead'>
-        Something happened. Please wait for a while and refresh the page
-      </p>
+    <div className='server-error'>
+      <div className='server-error__wrapper'>
+        <Logo />
+        <h1>Internal server error</h1>
+        <p>Please try again or refresh the page.</p>
+      </div>
     </div>
   );
-}
+};
 
 export default ServerError;

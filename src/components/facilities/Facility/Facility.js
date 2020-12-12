@@ -1,5 +1,5 @@
 import './Facility.css';
-import React, { Fragment, useEffect, useContext } from 'react';
+import React, { Fragment, useState, useEffect, useContext } from 'react';
 import Spinner from '../../layout/Spinner/Spinner';
 import Navigation from './ContentNavigation/ContentNavigation';
 import FacilityDetails from './Details/Details';
@@ -21,14 +21,16 @@ const Facility = (props) => {
     loading,
     clearFacility,
   } = faciltyContext;
+
   const { user, loadUser } = authContext;
 
   useEffect(() => {
     loadUser();
 
     const facilityId = props.match.params.facilityId;
-    if (facilityId) getFacility(facilityId);
-
+    if (facilityId) {
+      getFacility(facilityId);
+    }
     return () => {
       clearFacility();
     };
@@ -37,7 +39,7 @@ const Facility = (props) => {
 
   return (
     <Fragment>
-      {facility !== null && !loading ? (
+      {facility !== null && user !== null && !loading ? (
         <main className='facility-wrapper'>
           <div className='l-content'>
             <div className='facility'>
@@ -67,8 +69,7 @@ const Facility = (props) => {
 
               <section id='reviews' className='facility__reviews'>
                 <h3>Reviews</h3>
-                {/* <form onSubmit={onReviewSubmit}></form> */}
-                <Reviews />
+                <Reviews facilityId={facility._id} currentUser={user} />
               </section>
             </div>
           </div>

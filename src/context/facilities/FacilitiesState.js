@@ -8,8 +8,6 @@ import {
   FACILITY_LOADED,
   CLEAR_FACILITY,
   CLEAR_FACILITIES,
-  FACILITY_REVIEWS_LOADED,
-  FACILITY_REVIEWS_ERROR,
   TOP_FACILITIES_LOADED,
   TOP_FACILITIES_ERROR,
   FACILITY_ERROR,
@@ -69,19 +67,6 @@ const FacilitiesState = (props) => {
     }
   };
 
-  const getFacilityReviews = async (facilityId) => {
-    try {
-      const { data } = await ugCompass.get(`/facilities/${facilityId}`, {});
-
-      dispatch({ type: FACILITY_REVIEWS_LOADED, payload: data.data });
-    } catch (err) {
-      dispatch({
-        type: FACILITY_REVIEWS_ERROR,
-        payload: err.response.data.error,
-      });
-    }
-  };
-
   const getTopFacilities = async () => {
     try {
       const { data } = await ugCompass.get('/facilities', {
@@ -115,7 +100,6 @@ const FacilitiesState = (props) => {
         error: state.error,
         getFacilities,
         getFacility,
-        getFacilityReviews,
         clearFacility,
         clearFacilities,
         getTopFacilities,

@@ -1,6 +1,11 @@
 .alert-container {
   margin: 1.5rem auto;
   max-width: 600px;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  z-index: 9;
 }
 
 sl-icon {

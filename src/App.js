@@ -1,7 +1,7 @@
 import './App.css';
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Offline, Online } from 'react-detect-offline';
+import { Offline } from 'react-detect-offline';
 
 import Home from './components/pages/Home/Home';
 import Login from './components/pages/Auth/Login';
@@ -13,7 +13,7 @@ import ChangePassword from './components/pages/Auth/ChangePassword';
 import Dashboard from './components/pages/Admin/Dashboard';
 import UserSettings from './components/pages/UserSettings/UserSettings';
 
-import OffLineContent from './components/pages/Error/OffLine/OffLine';
+import Toast from './components/pages/Error/Toast/Toast';
 import MainNavigation from './components/layout/Navigation/MainNavigation.js';
 import Alerts from './components/layout/Alerts/Alerts';
 import Facility from './components/facilities/Facility/Facility';
@@ -22,6 +22,7 @@ import PrivateRoute from './components/routing/PrivateRoute';
 
 import AuthState from './context/auth/AuthState';
 import FacilitiesState from './context/facilities/FacilitiesState';
+import ReviewsState from './context/reviews/ReviewsState';
 import AlertState from './context/alert/AlertState';
 
 import setAuthToken from './utils/setAuthToken';
@@ -34,15 +35,19 @@ if (localStorage.ugcompassToken) {
 function App() {
   return (
     <Fragment>
-      <Offline>
-        <OffLineContent />
-      </Offline>
-      <Online>
-        <AuthState>
-          <AlertState>
-            <FacilitiesState>
+      <AuthState>
+        <AlertState>
+          <FacilitiesState>
+            <ReviewsState>
               <Router>
                 <MainNavigation />
+                <Offline>
+                  <Toast
+                    type='danger'
+                    msg='Connection is interrupted.'
+                    subMsg='Trying to reconnect...'
+                  />
+                </Offline>
                 <div className='container'>
                   <Alerts />
                   <Switch>
@@ -89,10 +94,10 @@ function App() {
                   </Switch>
                 </div>
               </Router>
-            </FacilitiesState>
-          </AlertState>
-        </AuthState>
-      </Online>
+            </ReviewsState>
+          </FacilitiesState>
+        </AlertState>
+      </AuthState>
     </Fragment>
   );
 }

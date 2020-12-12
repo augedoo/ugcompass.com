@@ -7,8 +7,6 @@ import {
   CLEAR_FACILITIES,
   SEARCH_SUCCESS,
   SEARCH_FAIL,
-  FACILITY_REVIEWS_LOADED,
-  FACILITY_REVIEWS_ERROR,
   TOP_FACILITIES_LOADED,
   TOP_FACILITIES_ERROR,
 } from '../types';
@@ -20,9 +18,6 @@ const facilityReducer = (state, action) => {
 
     case FACILITY_LOADED:
       return { ...state, facility: action.payload, loading: false };
-
-    case FACILITY_REVIEWS_LOADED:
-      return { ...state, reviews: action.payload, loading: false };
 
     case TOP_FACILITIES_LOADED:
       return {
@@ -46,7 +41,6 @@ const facilityReducer = (state, action) => {
 
     case FACILITIES_ERROR:
     case FACILITY_ERROR:
-    case FACILITY_REVIEWS_ERROR:
     case TOP_FACILITIES_ERROR:
     case SEARCH_FAIL:
       return { ...state, error: action.payload };
