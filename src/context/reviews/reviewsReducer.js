@@ -17,6 +17,7 @@ const reviewsReducer = (state, action) => {
       };
     case ADD_REVIEW_FAIL:
     case UPDATE_REVIEW_FAIL:
+    case DELETE_REVIEW_FAIL:
       return { ...state, reviewsError: action.payload };
 
     case REVIEWS_ERROR:

@@ -1,5 +1,5 @@
 import './Facility.css';
-import React, { Fragment, useState, useEffect, useContext } from 'react';
+import React, { Fragment, useEffect, useContext } from 'react';
 import Spinner from '../../layout/Spinner/Spinner';
 import Navigation from './ContentNavigation/ContentNavigation';
 import FacilityDetails from './Details/Details';

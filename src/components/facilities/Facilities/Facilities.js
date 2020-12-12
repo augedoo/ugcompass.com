@@ -32,7 +32,7 @@ const FacilityList = (props) => {
       getFacilities();
     }
 
-    if (error === 'Internal Server Error') {
+    if (error) {
       setAlert(
         error,
         'warning',
@@ -40,7 +40,6 @@ const FacilityList = (props) => {
         'Please try again or refresh the page'
       );
     }
-
     return () => {
       clearFacilities();
     };

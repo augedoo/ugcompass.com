@@ -28,6 +28,14 @@ const FacilitiesState = (props) => {
 
   const [state, dispatch] = useReducer(facilitiesReducer, initialState);
 
+  const setErrorResponse = (err, actionType) => {
+    if (err.response) {
+      dispatch({ type: actionType, payload: err.response.data.error });
+    } else {
+      dispatch({ type: actionType, payload: err.message });
+    }
+  };
+
   // Actions
   const getFacilities = async (category) => {
     let res;
@@ -39,7 +47,7 @@ const FacilitiesState = (props) => {
       }
       dispatch({ type: FACILITIES_LOADED, payload: res.data.data });
     } catch (err) {
-      dispatch({ type: FACILITIES_ERROR, payload: err.response.data.error });
+      setErrorResponse(err, FACILITIES_ERROR);
     }
   };
 
@@ -48,8 +56,7 @@ const FacilitiesState = (props) => {
       const { data } = await ugCompass.get(`/facilities/${facilityId}`);
       dispatch({ type: FACILITY_LOADED, payload: data.data });
     } catch (err) {
-      console.log(err.response);
-      dispatch({ type: FACILITY_ERROR, payload: err.response.data.error });
+      setErrorResponse(err, FACILITY_ERROR);
     }
   };
 
@@ -63,7 +70,7 @@ const FacilitiesState = (props) => {
       });
       dispatch({ type: SEARCH_SUCCESS, payload: data });
     } catch (err) {
-      dispatch({ type: SEARCH_FAIL, payload: err.response.data.error });
+      setErrorResponse(err, SEARCH_FAIL);
     }
   };
 
@@ -79,10 +86,7 @@ const FacilitiesState = (props) => {
       console.log(data);
       dispatch({ type: TOP_FACILITIES_LOADED, payload: data });
     } catch (err) {
-      dispatch({
-        type: TOP_FACILITIES_ERROR,
-        payload: err.response.data.error,
-      });
+      setErrorResponse(err, TOP_FACILITIES_ERROR);
     }
   };
 

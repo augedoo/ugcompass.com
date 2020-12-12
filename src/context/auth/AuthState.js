@@ -38,9 +38,13 @@ const AuthState = (props) => {
   // Init Reducer
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  //===============
-  // Actions
-  //===============
+  const setErrorResponse = (err, actionType) => {
+    if (err.response) {
+      dispatch({ type: actionType, payload: err.response.data.error });
+    } else {
+      dispatch({ type: actionType, payload: err.message });
+    }
+  };
 
   // Load User
   const loadUser = async () => {
@@ -58,8 +62,7 @@ const AuthState = (props) => {
         payload: data,
       });
     } catch (err) {
-      console.log(err);
-      dispatch({ type: AUTH_ERROR, payload: err.response.data.error });
+      setErrorResponse(err, AUTH_ERROR);
     }
   };
 
@@ -81,7 +84,7 @@ const AuthState = (props) => {
 
       loadUser();
     } catch (err) {
-      dispatch({ type: SIGNUP_FAIL, payload: err.response.data.error });
+      setErrorResponse(err, SIGNUP_FAIL);
     }
   };
 
@@ -103,6 +106,7 @@ const AuthState = (props) => {
       loadUser();
     } catch (err) {
       dispatch({ type: LOGIN_FAIL, payload: err.response.data.error });
+      setErrorResponse(err, LOGIN_FAIL);
     }
   };
 
@@ -121,10 +125,7 @@ const AuthState = (props) => {
       );
       dispatch({ type: FORGOT_PASSWORD_SUCCESS, payload: data });
     } catch (err) {
-      dispatch({
-        type: FORGOT_PASSWORD_FAIL,
-        payload: err.response.data.error,
-      });
+      setErrorResponse(err, FORGOT_PASSWORD_FAIL);
     }
   };
 
@@ -146,10 +147,7 @@ const AuthState = (props) => {
       );
       dispatch({ type: RESET_PASSWORD_SUCCESS, payload: data.token });
     } catch (err) {
-      dispatch({
-        type: RESET_PASSWORD_FAIL,
-        payload: err.response.data.error,
-      });
+      setErrorResponse(err, RESET_PASSWORD_FAIL);
     }
   };
 
@@ -173,10 +171,7 @@ const AuthState = (props) => {
       );
       dispatch({ type: UPDATE_DETAIL_SUCCESS, payload: data });
     } catch (err) {
-      dispatch({
-        type: UPDATE_DETAIL_FAIL,
-        payload: err.response.data.error,
-      });
+      setErrorResponse(err, UPDATE_DETAIL_FAIL);
     }
   };
 
@@ -200,10 +195,7 @@ const AuthState = (props) => {
       );
       dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data.token });
     } catch (err) {
-      dispatch({
-        type: UPDATE_PASSWORD_FAIL,
-        payload: err.response.data.error,
-      });
+      setErrorResponse(err, UPDATE_PASSWORD_FAIL);
     }
   };
 

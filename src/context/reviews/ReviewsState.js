@@ -12,6 +12,7 @@ import {
   CLEAR_REVIEWS,
   CLEAR_REVIEWS_ERRORS,
   UPDATE_REVIEW_FAIL,
+  DELETE_REVIEW_FAIL,
 } from '../types';
 
 const ReviewsState = (props) => {
@@ -26,6 +27,14 @@ const ReviewsState = (props) => {
 
   const [state, dispatch] = useReducer(reviewsReducer, initialState);
 
+  const setErrorResponse = (err, actionType) => {
+    if (err.response) {
+      dispatch({ type: actionType, payload: err.response.data.error });
+    } else {
+      dispatch({ type: actionType, payload: err.message });
+    }
+  };
+
   // Actions
   const getReviews = async (facilityId) => {
     let res;
@@ -37,7 +46,7 @@ const ReviewsState = (props) => {
       }
       dispatch({ type: REVIEWS_LOADED, payload: res.data.data });
     } catch (err) {
-      dispatch({ type: REVIEWS_ERROR, payload: err.response.data.error });
+      setErrorResponse(err, REVIEWS_ERROR);
     }
   };
 
@@ -57,7 +66,7 @@ const ReviewsState = (props) => {
       setAlert('Review added successfully', 'success', 'check2-circle');
       getReviews(facilityId);
     } catch (err) {
-      dispatch({ type: ADD_REVIEW_FAIL, payload: err.response.data.error });
+      setErrorResponse(err, ADD_REVIEW_FAIL);
     }
   };
 
@@ -74,7 +83,7 @@ const ReviewsState = (props) => {
       setAlert('Review updated successfully', 'success', 'check2-circle');
       getReviews(facilityId);
     } catch (err) {
-      dispatch({ type: UPDATE_REVIEW_FAIL, payload: err.response.data.error });
+      setErrorResponse(err, UPDATE_REVIEW_FAIL);
     }
   };
 
@@ -90,7 +99,7 @@ const ReviewsState = (props) => {
       setAlert('Review delete successfully', 'success', 'check2-circle');
       getReviews(facilityId);
     } catch (err) {
-      dispatch({ type: UPDATE_REVIEW_FAIL, payload: err.response.data.error });
+      setErrorResponse(err, DELETE_REVIEW_FAIL);
     }
   };
 
