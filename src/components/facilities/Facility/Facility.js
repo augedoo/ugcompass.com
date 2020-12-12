@@ -76,7 +76,7 @@ const Facility = (props) => {
           <div className='r-content'>
             <div className='r-content-wrapper'>
               <Navigation />
-              <Map />
+              <Map facility={facility} />
             </div>
           </div>
         </main>
