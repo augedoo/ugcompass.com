@@ -81,7 +81,7 @@ const ForgotPassword = () => {
           <button type='submit'>Reset Password</button>
         </div>
         <div className='existing-account'>
-          Don't have an account? <a href='/signup'>Sign Up</a>
+          <a href='/login'>Back To Login</a>
         </div>
       </div>
     </form>
