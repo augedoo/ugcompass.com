@@ -36,11 +36,14 @@
   font-weight: 500;
 }
 
-.facility__carousel {
+.facility__images {
   width: 100%;
-  height: 450px;
   margin-top: 1.5rem;
-  background: #ccc;
+  overflow: hidden;
+}
+
+.facility__images h3 {
+  margin-bottom: 1rem;
 }
 
 .facility__rooms {

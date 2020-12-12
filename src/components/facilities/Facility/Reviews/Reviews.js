@@ -164,9 +164,9 @@ const Reviews = ({ currentUser, facilityId }) => {
       </form>
 
       <div className='reviews-wrapper'>
+        <h3>Reviews from others</h3>
         {currentReviews && !reviewsLoading ? (
           <Fragment>
-            <h3>Reviews from others</h3>
             {currentReviews.length > 0 ? (
               // Render review when everything is okay
               currentReviews.map((review) => {

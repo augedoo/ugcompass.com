@@ -3,8 +3,6 @@ import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 const Map = ({ facility }) => {
-  console.log(facility);
-
   const { location: loc, name, _id } = facility;
 
   const position = [loc.coordinates[1], loc.coordinates[0]];

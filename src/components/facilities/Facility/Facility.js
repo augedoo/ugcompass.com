@@ -6,7 +6,7 @@ import FacilityDetails from './Details/Details';
 import Map from './Map/Map';
 import Reviews from './Reviews/Reviews';
 import RoomsList from './RoomsList/RoomsList';
-import Carousel from '../../layout/Carousel/Carousel';
+import ImageList from '../../layout/ImageList/ImageList';
 
 import FacilityContext from '../../../context/facilities/facilitiesContext';
 import AuthContext from '../../../context/auth/authContext';
@@ -43,21 +43,24 @@ const Facility = (props) => {
         <main className='facility-wrapper'>
           <div className='l-content'>
             <div className='facility'>
-              <section className='facility__heading'>
-                <h1>
-                  {facility.name}
-                  <sl-badge type='info'>{`${facility.campus} campus`}</sl-badge>
-                </h1>
-                <p>{`${facility.category} facility`}</p>
-              </section>
+              <div id='details'>
+                <section className='facility__heading'>
+                  <h1>
+                    {facility.name}
+                    <sl-badge type='info'>{`${facility.campus} campus`}</sl-badge>
+                  </h1>
+                  <p>{`${facility.category} facility`}</p>
+                </section>
 
-              <section id='details' className='facility__details'>
-                <h3>Description</h3>
-                <FacilityDetails facility={facility} />
-              </section>
+                <section className='facility__details'>
+                  <h3>Description</h3>
+                  <FacilityDetails facility={facility} />
+                </section>
+              </div>
 
-              <section id='photos' className='facility__carousel'>
-                {/* <Carousel /> */}
+              <section id='photos' className='facility__images'>
+                <h3>Photos</h3>
+                <ImageList entity={facility} />
               </section>
 
               {facility.rooms.length > 0 && (

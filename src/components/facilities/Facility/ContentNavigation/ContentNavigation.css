@@ -12,6 +12,12 @@
   padding: 0.75rem 0.5rem;
   border-bottom: 1px solid #e3e6e8;
   width: 100%;
+  cursor: pointer;
+}
+
+.facility__navigation li a.active {
+  border-left: 5px solid var(--primary-color);
+  color: var(--secondary-color);
 }
 
 .facility__navigation li a:hover {
