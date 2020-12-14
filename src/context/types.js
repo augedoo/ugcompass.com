@@ -35,5 +35,9 @@ export const ADD_REVIEW_FAIL = 'ADD_REVIEW_FAIL';
 export const UPDATE_REVIEW_FAIL = 'UPDATE_REVIEW_FAIL';
 export const DELETE_REVIEW_FAIL = 'DELETE_REVIEW_FAIL';
 
+export const ROOM_LOADED = 'ROOM_LOADED';
+export const ROOM_LOADED_ERROR = 'ROOM_LOADED_ERROR';
+export const CLEAR_ROOM = 'CLEAR_ROOM';
+
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';

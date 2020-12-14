@@ -110,6 +110,19 @@ const Reviews = ({ currentUser, facilityId }) => {
         <div className='form-wrapper'>
           <div className='form-row'>
             <div className='form-control'>
+              <label htmlFor='title'>Title</label>
+              <input
+                type='text'
+                name='title'
+                id='title'
+                placeholder='Enter review title'
+                onChange={onChange}
+                value={reviewFormData.title}
+                required
+              />
+              <div className='help-text'>Keep title short</div>
+            </div>
+            <div className='form-control'>
               <label htmlFor='rating'>Rating</label>
               <select
                 name='rating'
@@ -123,19 +136,6 @@ const Reviews = ({ currentUser, facilityId }) => {
                 <option value='4'>2 - Fair</option>
                 <option value='2'>1 - Poor</option>
               </select>
-            </div>
-            <div className='form-control'>
-              <label htmlFor='title'>Title</label>
-              <input
-                type='text'
-                name='title'
-                id='title'
-                placeholder='Enter review title'
-                onChange={onChange}
-                value={reviewFormData.title}
-                required
-              />
-              <div className='help-text'>Keep title short</div>
             </div>
           </div>
           <div className='form-control'>

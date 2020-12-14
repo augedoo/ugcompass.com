@@ -13,12 +13,17 @@ import {
   FACILITY_ERROR,
   SEARCH_SUCCESS,
   SEARCH_FAIL,
+  ROOM_LOADED,
+  ROOM_LOADED_ERROR,
+  CLEAR_ROOM,
+  CLEAR_ERRORS,
 } from '../types';
 
 const FacilitiesState = (props) => {
   const initialState = {
     facilities: null,
     facility: null,
+    room: null,
     topFacilities: null,
     searchedFacilities: null,
     reviews: [],
@@ -83,16 +88,28 @@ const FacilitiesState = (props) => {
           order_by: '-averageRating',
         },
       });
-      console.log(data);
       dispatch({ type: TOP_FACILITIES_LOADED, payload: data });
     } catch (err) {
       setErrorResponse(err, TOP_FACILITIES_ERROR);
     }
   };
 
+  const getRoom = async (roomId) => {
+    try {
+      const { data } = await ugCompass.get(`/rooms/${roomId}`);
+      dispatch({ type: ROOM_LOADED, payload: data.data });
+    } catch (err) {
+      setErrorResponse(err, ROOM_LOADED_ERROR);
+    }
+  };
+
   const clearFacility = () => dispatch({ type: CLEAR_FACILITY });
 
   const clearFacilities = () => dispatch({ type: CLEAR_FACILITIES });
+
+  const clearRoom = () => dispatch({ type: CLEAR_ROOM });
+
+  const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
   return (
     <FacilitiesContext.Provider
@@ -108,6 +125,10 @@ const FacilitiesState = (props) => {
         clearFacilities,
         getTopFacilities,
         searchFacility,
+        room: state.room,
+        getRoom,
+        clearRoom,
+        clearErrors,
       }}
     >
       {props.children}

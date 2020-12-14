@@ -5,6 +5,7 @@ import {
   REVIEWS_ERROR,
   CLEAR_REVIEWS,
   CLEAR_REVIEWS_ERRORS,
+  DELETE_REVIEW_FAIL,
 } from '../types';
 
 const reviewsReducer = (state, action) => {

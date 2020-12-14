@@ -9,6 +9,10 @@ import {
   SEARCH_FAIL,
   TOP_FACILITIES_LOADED,
   TOP_FACILITIES_ERROR,
+  ROOM_LOADED,
+  ROOM_LOADED_ERROR,
+  CLEAR_ROOM,
+  CLEAR_ERRORS,
 } from '../types';
 
 const facilityReducer = (state, action) => {
@@ -18,6 +22,9 @@ const facilityReducer = (state, action) => {
 
     case FACILITY_LOADED:
       return { ...state, facility: action.payload, loading: false };
+
+    case ROOM_LOADED:
+      return { ...state, room: action.payload, loading: false };
 
     case TOP_FACILITIES_LOADED:
       return {
@@ -35,12 +42,16 @@ const facilityReducer = (state, action) => {
 
     case CLEAR_FACILITY:
       return { ...state, facility: null };
-
     case CLEAR_FACILITIES:
       return { ...state, facilities: null };
+    case CLEAR_ROOM:
+      return { ...state, room: null };
+    case CLEAR_ERRORS:
+      return { ...state, error: null };
 
     case FACILITIES_ERROR:
     case FACILITY_ERROR:
+    case ROOM_LOADED_ERROR:
     case TOP_FACILITIES_ERROR:
     case SEARCH_FAIL:
       return { ...state, error: action.payload };

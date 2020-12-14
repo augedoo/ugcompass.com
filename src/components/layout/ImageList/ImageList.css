@@ -13,3 +13,14 @@
 .image-list img:hover {
   transform: scale(1.1);
 }
+
+.image-list .lb-header {
+  padding-top: 1rem !important;
+  background-color: transparent !important;
+  box-shadow: 0px 1px 5px 0px rgba(17, 17, 17, 0) !important;
+  justify-content: center !important;
+}
+
+.image-list .lb-header .close {
+  margin-left: auto;
+}

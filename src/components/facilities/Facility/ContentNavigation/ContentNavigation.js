@@ -2,8 +2,8 @@ import './ContentNavigation.css';
 import React from 'react';
 import { Link } from 'react-scroll';
 
-const ContentNavigation = () => {
-  console.log('PAGE RE-RENDERING');
+const ContentNavigation = ({ facility }) => {
+  const { photos, rooms } = facility;
 
   return (
     <nav className='facility__navigation'>
@@ -21,6 +21,7 @@ const ContentNavigation = () => {
               Description
             </Link>
           </li>
+          {/* Todo: Hide this link if facility have no photo */}
           <li>
             <Link
               activeClass='active'
@@ -33,18 +34,20 @@ const ContentNavigation = () => {
               Photos
             </Link>
           </li>
-          <li>
-            <Link
-              activeClass='active'
-              to='rooms'
-              spy={true}
-              smooth={false}
-              offset={-80}
-              duration={500}
-            >
-              Rooms
-            </Link>
-          </li>
+          {rooms.length > 0 && (
+            <li>
+              <Link
+                activeClass='active'
+                to='rooms'
+                spy={true}
+                smooth={false}
+                offset={-80}
+                duration={500}
+              >
+                Rooms
+              </Link>
+            </li>
+          )}
           <li>
             <Link
               activeClass='active'

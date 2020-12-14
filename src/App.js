@@ -18,6 +18,7 @@ import MainNavigation from './components/layout/Navigation/MainNavigation.js';
 import Alerts from './components/layout/Alerts/Alerts';
 import Facility from './components/facilities/Facility/Facility';
 import Facilities from './components/facilities/Facilities/Facilities';
+import Room from './components/rooms/Room';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 import AuthState from './context/auth/AuthState';
@@ -66,6 +67,11 @@ function App() {
                       exact
                       path='/facilities/:facilityId'
                       component={Facility}
+                    />
+                    <PrivateRoute
+                      exact
+                      path='/rooms/:roomId'
+                      component={Room}
                     />
                     <PrivateRoute
                       exact

@@ -12,7 +12,7 @@ import FacilityContext from '../../../context/facilities/facilitiesContext';
 import AuthContext from '../../../context/auth/authContext';
 
 const Facility = (props) => {
-  const faciltyContext = useContext(FacilityContext);
+  const facilityContext = useContext(FacilityContext);
   const authContext = useContext(AuthContext);
   const {
     getFacility,
@@ -20,7 +20,8 @@ const Facility = (props) => {
     error,
     loading,
     clearFacility,
-  } = faciltyContext;
+    clearErrors,
+  } = facilityContext;
 
   const { user, loadUser } = authContext;
 
@@ -33,6 +34,7 @@ const Facility = (props) => {
     }
     return () => {
       clearFacility();
+      clearErrors();
     };
     // eslint-disable-next-line
   }, [error]);
@@ -58,6 +60,7 @@ const Facility = (props) => {
                 </section>
               </div>
 
+              {/* Todo: Hide this section if facility have no photo */}
               <section id='photos' className='facility__images'>
                 <h3>Photos</h3>
                 <ImageList entity={facility} />
@@ -78,7 +81,7 @@ const Facility = (props) => {
           </div>
           <div className='r-content'>
             <div className='r-content-wrapper'>
-              <Navigation />
+              <Navigation facility={facility} />
               <Map facility={facility} />
             </div>
           </div>

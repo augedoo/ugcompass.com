@@ -86,25 +86,25 @@ const UserSettings = () => {
 
   return (
     <div className='user_settings'>
-      {user ? (
-        <div className='user_settings__wrapper'>
-          <h1>Preferrences</h1>
-          <sl-tab-group placement='left'>
-            <sl-tab slot='nav' panel='profile'>
-              Your Profile
-            </sl-tab>
-            <sl-tab slot='nav' panel='details'>
-              Update Details
-            </sl-tab>
-            <sl-tab slot='nav' panel='password'>
-              Update Password
-            </sl-tab>
-            <sl-tab slot='nav' panel='disabled' disabled>
-              More Settings
-            </sl-tab>
+      <div className='user_settings__wrapper'>
+        <h1>Preferrences</h1>
+        <sl-tab-group placement='left'>
+          <sl-tab slot='nav' panel='profile'>
+            Your Profile
+          </sl-tab>
+          <sl-tab slot='nav' panel='details'>
+            Update Details
+          </sl-tab>
+          <sl-tab slot='nav' panel='password'>
+            Update Password
+          </sl-tab>
+          <sl-tab slot='nav' panel='disabled' disabled>
+            More Settings
+          </sl-tab>
 
-            {/* Profile */}
-            <sl-tab-panel name='profile'>
+          {/* Profile */}
+          <sl-tab-panel name='profile'>
+            {user ? (
               <div className='profile'>
                 <div className='form-group'>
                   <p className='label'>Name</p>
@@ -119,10 +119,14 @@ const UserSettings = () => {
                   <p>{user.role}</p>
                 </div>
               </div>
-            </sl-tab-panel>
+            ) : (
+              <Spinner />
+            )}
+          </sl-tab-panel>
 
-            {/* Details */}
-            <sl-tab-panel name='details'>
+          {/* Details */}
+          <sl-tab-panel name='details'>
+            {user ? (
               <form onSubmit={updateDetail}>
                 <label htmlFor='name'>Name</label>
                 <input
@@ -154,46 +158,44 @@ const UserSettings = () => {
                 <br />
                 <button type='submit'>Update My Credentials</button>
               </form>
-            </sl-tab-panel>
+            ) : (
+              <Spinner />
+            )}
+          </sl-tab-panel>
 
-            {/* Password */}
-            <sl-tab-panel name='password'>
-              <form onSubmit={updatePassword}>
-                <label htmlFor='currentPassword'>Current Password</label>
-                <input
-                  onChange={onInputChange}
-                  type='password'
-                  placeholder='Enter your current password'
-                  id='currentPassword'
-                  name='currentPassword'
-                  minLength='6'
-                  required={true}
-                />
-                <br />
-                <label htmlFor='newPassword'>New Password</label>
-                <input
-                  onChange={onInputChange}
-                  type='password'
-                  id='newPassword'
-                  name='newPassword'
-                  placeholder='Enter new password'
-                  minLength='6'
-                  required={true}
-                />
-                <br />
-                <br />
-                <button type='submit'>Update My Password</button>
-              </form>
-            </sl-tab-panel>
+          {/* Password */}
+          <sl-tab-panel name='password'>
+            <form onSubmit={updatePassword}>
+              <label htmlFor='currentPassword'>Current Password</label>
+              <input
+                onChange={onInputChange}
+                type='password'
+                placeholder='Enter your current password'
+                id='currentPassword'
+                name='currentPassword'
+                minLength='6'
+                required={true}
+              />
+              <br />
+              <label htmlFor='newPassword'>New Password</label>
+              <input
+                onChange={onInputChange}
+                type='password'
+                id='newPassword'
+                name='newPassword'
+                placeholder='Enter new password'
+                minLength='6'
+                required={true}
+              />
+              <br />
+              <br />
+              <button type='submit'>Update My Password</button>
+            </form>
+          </sl-tab-panel>
 
-            <sl-tab-panel name='disabled'>
-              This is a disabled panel.
-            </sl-tab-panel>
-          </sl-tab-group>
-        </div>
-      ) : (
-        <Spinner />
-      )}
+          <sl-tab-panel name='disabled'>This is a disabled panel.</sl-tab-panel>
+        </sl-tab-group>
+      </div>
     </div>
   );
 };
