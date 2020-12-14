@@ -68,7 +68,7 @@ const MainNavigation = () => {
     document.addEventListener('click', searchFormInactive);
 
     return () => document.removeEventListener('click', searchFormInactive);
-  }, [searchedFacilities, searchFormRef.current]);
+  }, [searchedFacilities]);
 
   const onLogout = () => {
     logout();
@@ -109,7 +109,7 @@ const MainNavigation = () => {
             <a href='#/terms'>Terms and Privacy</a>
           </li> */}
           <li className='logout' onClick={onLogout}>
-            <a href='#'>Logout</a>
+            <a href='#!'>Logout</a>
           </li>
         </ul>
       </li>

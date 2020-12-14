@@ -1,6 +1,6 @@
 import './UserSettings.css';
 import '../../pages/Auth/Auth.css';
-import React, { useEffect, Fragment, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import Spinner from '../../layout/Spinner/Spinner';
 
 import AuthContext from '../../../context/auth/authContext';

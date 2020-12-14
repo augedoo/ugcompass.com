@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-scroll';
 
 const ContentNavigation = ({ facility }) => {
-  const { photos, rooms } = facility;
+  const { rooms } = facility;
 
   return (
     <nav className='facility__navigation'>
