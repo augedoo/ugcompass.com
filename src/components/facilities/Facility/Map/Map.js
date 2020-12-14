@@ -1,5 +1,6 @@
 import './Map.css';
 import React from 'react';
+import L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 const Map = ({ facility }) => {
