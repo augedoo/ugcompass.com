@@ -1,5 +1,6 @@
 import './Reviews.css';
 import moment from 'moment';
+import { Link } from 'react-scroll';
 import React, { Fragment, useState, useEffect, useContext } from 'react';
 import ReviewsContext from '../../../../context/reviews/reviewsContext';
 import AlertContext from '../../../../context/alert/alertContext';
@@ -98,6 +99,8 @@ const Reviews = ({ currentUser, facilityId }) => {
     });
   };
 
+  console.log(currentUser);
+
   return (
     <Fragment>
       <form
@@ -170,49 +173,54 @@ const Reviews = ({ currentUser, facilityId }) => {
             {currentReviews.length > 0 ? (
               // Render review when everything is okay
               currentReviews.map((review) => {
+                console.log(review);
                 const { _id, rating, title, text, user, createdAt } = review;
                 return (
                   <div key={_id} className='review'>
                     <div className='rating-controls'>
-                      <sl-rating
-                        readonly
-                        max='5'
-                        value={rating / 2}
-                      ></sl-rating>
-                      {currentUser._id.toString() === user._id.toString() && (
-                        <div>
-                          <a
-                            href='#!'
-                            onClick={() => onDeleteReviewSubmit(_id)}
-                          >
-                            <sl-tooltip
-                              content='Delete Comment'
-                              placement='bottom'
+                      <sl-rating max='5' value={rating / 2}></sl-rating>
+                      {user &&
+                        currentUser._id.toString() === user._id.toString() && (
+                          <div>
+                            <a
+                              href='#!'
+                              onClick={() => onDeleteReviewSubmit(_id)}
                             >
-                              <sl-icon name='trash-fill'></sl-icon>
-                            </sl-tooltip>
-                          </a>
-                          <a
-                            href='#review-form'
-                            onClick={() => onEditReview(review)}
-                          >
-                            <sl-tooltip
-                              content='Edit Comment'
-                              placement='bottom'
+                              <sl-tooltip
+                                content='Delete Comment'
+                                placement='bottom'
+                              >
+                                <sl-icon name='trash-fill'></sl-icon>
+                              </sl-tooltip>
+                            </a>
+
+                            <Link
+                              activeClass='active'
+                              to='reviews'
+                              spy={true}
+                              smooth={false}
+                              offset={-80}
+                              duration={500}
+                              onClick={() => onEditReview(review)}
                             >
-                              <sl-icon name='pencil-square'></sl-icon>
-                            </sl-tooltip>
-                          </a>
-                        </div>
-                      )}
+                              <sl-tooltip
+                                content='Edit Comment'
+                                placement='bottom'
+                              >
+                                <sl-icon name='pencil-square'></sl-icon>
+                              </sl-tooltip>
+                            </Link>
+                          </div>
+                        )}
                     </div>
                     <h5>{title}</h5>
                     <p>{text}</p>
                     <span className='time-ago'>
-                      {moment(createdAt).fromNow()} by{' '}
-                      {currentUser._id.toString() === user._id.toString()
-                        ? 'You'
-                        : user.name}
+                      {moment(createdAt).fromNow()}
+                      {user &&
+                        (currentUser._id.toString() === user._id.toString()
+                          ? ' by You'
+                          : ' by ' + user.name)}
                     </span>
                   </div>
                 );

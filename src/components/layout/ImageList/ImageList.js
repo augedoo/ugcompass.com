@@ -4,8 +4,6 @@ import ImageCard from './ImageCard';
 import { v4 as uuid } from 'uuid';
 
 const ImageList = ({ entity }) => {
-  console.log(entity);
-
   const images = [
     'https://picsum.photos/id/10/800/500',
     'https://picsum.photos/id/11/800/500',
