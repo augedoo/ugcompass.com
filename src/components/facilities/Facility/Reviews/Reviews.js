@@ -178,7 +178,11 @@ const Reviews = ({ currentUser, facilityId }) => {
                 return (
                   <div key={_id} className='review'>
                     <div className='rating-controls'>
-                      <sl-rating max='5' value={rating / 2}></sl-rating>
+                      <sl-rating
+                        readonly
+                        max='5'
+                        value={rating / 2}
+                      ></sl-rating>
                       {user &&
                         currentUser._id.toString() === user._id.toString() && (
                           <div>
