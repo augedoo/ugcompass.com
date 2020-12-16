@@ -196,7 +196,7 @@ const Reviews = ({ currentUser, facilityId }) => {
 
                             <Link
                               activeClass='active'
-                              to='reviews'
+                              to='review-form'
                               spy={true}
                               smooth={false}
                               offset={-80}
